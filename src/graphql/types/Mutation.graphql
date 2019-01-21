@@ -1,0 +1,3 @@
+type Mutation {    
+  addPost(id: Int!, content: String!, likes: Int, dislike: Int, date: String): Post
+}

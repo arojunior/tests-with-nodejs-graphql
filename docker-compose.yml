@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7.21
+    environment:
+        - MYSQL_HOST=localhost
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=mydb
+        - MYSQL_USER=user
+        - MYSQL_PASSWORD=password
+    command: mysqld --lower_case_table_names=1 --skip-ssl
+    ports:
+        - "3306:3306"
+    volumes:
+        - ./docker/data/mysql/:/var/lib/mysql
+  flyway_mysql:
+    image: arojunior/flyway:5.2.4
+    command: "wait-for-it --timeout=60 --strict mysql:3306 -- flyway migrate"
+    volumes:
+      - ./docker/mysql/migrations/config:/flyway/conf
+      - ./docker/mysql/migrations/sql:/flyway/sql
+    depends_on:
+      - mysql
