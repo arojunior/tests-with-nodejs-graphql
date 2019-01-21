@@ -13,6 +13,8 @@ const main = async () => {
 const execute = async (queryString, params = null) => {
   const connection = await main();
   const [rows, fields] = await connection.execute(queryString, params);
+  connection.close();
+
   return {
     rows,
     fields,
