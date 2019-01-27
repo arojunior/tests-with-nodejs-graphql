@@ -1,11 +1,11 @@
 const util = require(`util`);
 const exec = util.promisify(require(`child_process`).exec);
 
-export const startContainers = async () => {
+const startContainers = async () => {
   await exec(`docker-compose up -d`);
 };
 
-export const waitForMigrations = async () => {
+const waitForMigrations = async () => {
   return new Promise(resolve => {
     const interval = setInterval(async () => {
       const { stdout } = await exec(`docker-compose logs`);
@@ -22,6 +22,17 @@ export const waitForMigrations = async () => {
   });
 };
 
-export const destroyContainers = async () => {
+const destroyContainers = async () => {
   await exec(`docker-compose down`);
 };
+
+jest.setTimeout(120000);
+
+beforeAll(async () => {
+  await startContainers();
+  await waitForMigrations();
+});
+
+afterAll(async () => {
+  await destroyContainers();
+});

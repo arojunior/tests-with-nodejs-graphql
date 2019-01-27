@@ -1,16 +1,9 @@
 import supertest from 'supertest';
 import graphQLServer from '../server';
-import { waitForMigrations, startContainers, destroyContainers } from '../config/setupTests';
 
 const request = supertest(graphQLServer);
-jest.setTimeout(60000);
 
 describe(`PostResolver`, () => {
-  beforeAll(async () => {
-    await startContainers();
-    await waitForMigrations();
-  });
-
   describe(`Query`, () => {
     it(`Should return all posts`, async () => {
       // arrange
@@ -35,9 +28,5 @@ describe(`PostResolver`, () => {
       // assert
       expect(data.posts).not.toBeNull();
     });
-  });
-
-  afterAll(async () => {
-    await destroyContainers();
   });
 });

@@ -57,6 +57,7 @@
   },
   "jest": {
     "testEnvironment": "node",
+    "setupTestFrameworkScriptFile": "<rootDir>src/config/setupTests.js",
     "testPathIgnorePatterns": [
       "/node_modules/",
       "./build"
