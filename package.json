@@ -50,14 +50,13 @@
     "start": "NODE_ENV=production node ./build/index.js",
     "prestart": "yarn build",
     "dev": "nodemon ./src/index.js --exec babel-node",
-    "test-docker": "jest",
+    "test-ci": "jest --setupTestFrameworkScriptFile=<rootDir>src/config/setupTests.js",
     "test": "jest --verbose=false",
     "lint": "eslint src",
     "prepush": "yarn lint && yarn build"
   },
   "jest": {
     "testEnvironment": "node",
-    "setupTestFrameworkScriptFile": "<rootDir>src/config/setupTests.js",
     "testPathIgnorePatterns": [
       "/node_modules/",
       "./build"
