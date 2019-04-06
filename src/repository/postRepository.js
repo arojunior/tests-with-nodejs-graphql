@@ -6,7 +6,7 @@ const findById = async id => {
     return rows && rows.length ? rows[0] : null;
   } catch (error) {
     console.log(`[ERROR]: findById`, error);
-    return error;
+    return null;
   }
 };
 
@@ -16,11 +16,27 @@ const findAll = async () => {
     return rows;
   } catch (error) {
     console.log(`[ERROR]: findAll`, error);
-    return error;
+    return null;
+  }
+};
+
+const create = async post => {
+  try {
+    const {
+      rows: { insertId },
+    } = await mysql.execute(`insert into post (content, created) values (?,?)`, [
+      post.content,
+      new Date(),
+    ]);
+    return findById(insertId);
+  } catch (error) {
+    console.log(`[ERROR]: create`, error);
+    return null;
   }
 };
 
 export default {
   findById,
   findAll,
+  create,
 };

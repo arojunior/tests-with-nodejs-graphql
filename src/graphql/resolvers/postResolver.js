@@ -8,9 +8,16 @@ const posts = () => {
   return postRepository.findAll();
 };
 
+const addPost = (_, { postInput }) => {
+  return postRepository.create(postInput);
+};
+
 export default {
   Query: {
     post,
     posts,
+  },
+  Mutation: {
+    addPost,
   },
 };

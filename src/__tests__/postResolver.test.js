@@ -27,7 +27,7 @@ describe(`PostResolver`, () => {
 
       // assert
       expect(data.posts).not.toBeNull();
-      expect(data.posts).toHaveLength(4);
+      expect(data.posts).not.toHaveLength(0);
     });
 
     it(`Should return specific post by id`, async () => {
@@ -53,6 +53,36 @@ describe(`PostResolver`, () => {
       // assert
       expect(data.post).not.toBeNull();
       expect(data.post.id).toBe(1);
+    });
+  });
+
+  describe(`Mutation`, () => {
+    it(`Should add new post`, async () => {
+      // arrange
+      const postMutation = post => ({
+        query: `mutation {
+            addPost(postInput: { content: "${post.content}" }) {
+              id
+              content
+              created
+            }
+          }`,
+      });
+
+      const postInput = {
+        id: 0,
+        content: `Description test`,
+      };
+
+      // act
+      const response = await request.post(`/graphql`).send(postMutation(postInput));
+      const {
+        body: { data },
+      } = response;
+
+      // assert
+      expect(data.addPost).not.toBeNull();
+      expect(data.addPost.content).toBe(postInput.content);
     });
   });
 });

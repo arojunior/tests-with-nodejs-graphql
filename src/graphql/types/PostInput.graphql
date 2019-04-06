@@ -1,0 +1,4 @@
+input PostInput {
+  id: Int
+  content: String!
+}
