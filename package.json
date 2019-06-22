@@ -50,7 +50,7 @@
     "start": "NODE_ENV=production node ./build/index.js",
     "prestart": "yarn build",
     "dev": "nodemon ./src/index.js --exec babel-node",
-    "test-ci": "jest --setupTestFrameworkScriptFile=<rootDir>src/config/setupTests.js",
+    "test-ci": "jest --setupTestFrameworkScriptFile=./src/config/setupTests.js",
     "test": "jest --verbose=false",
     "lint": "eslint src",
     "prepush": "yarn lint && yarn build"

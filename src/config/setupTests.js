@@ -6,6 +6,7 @@ const startContainers = async () => {
 };
 
 const waitForMigrations = async () => {
+  console.log(`=== waiting for migrations...`);
   return new Promise(resolve => {
     const interval = setInterval(async () => {
       const { stdout } = await exec(`docker-compose logs`);
@@ -23,6 +24,7 @@ const waitForMigrations = async () => {
 };
 
 const destroyContainers = async () => {
+  console.log(`=== destroying containers...`);
   await exec(`docker-compose down`);
 };
 
