@@ -1,6 +1,9 @@
 import mysql from 'mysql2/promise';
 
 const main = async () => {
+  /**
+   * Don't ever store your credentials on git, this is just for the sake of convenience
+   */
   const connection = await mysql.createConnection({
     host: `localhost`,
     user: `user`,

@@ -2,11 +2,12 @@ const util = require(`util`);
 const exec = util.promisify(require(`child_process`).exec);
 
 const startContainers = async () => {
+  console.log(`=== starting containers...`);
   await exec(`docker-compose up -d`);
 };
 
 const waitForMigrations = async () => {
-  console.log(`=== waiting for migrations...`);
+  console.log(`=== waiting for the migrations...`);
   return new Promise(resolve => {
     const interval = setInterval(async () => {
       const { stdout } = await exec(`docker-compose logs`);
