@@ -21,3 +21,22 @@ The other helper is the `config/setupTests.js` script. It is used to get the dat
 - Reliable test, I mean, not just for schema;
 - Easy to setup;
 - Easy to understand;
+
+### Runnning the tests
+
+**Locally**
+
+```sh
+docker-compose up -d
+```
+
+After all the containers get up, you can run
+```sh
+yarn && yarn test
+```
+
+**On CI**
+```sh
+yarn && yarn test-ci
+```
+The `test-ci` script will execute the `setupTests.js` before running the tests, which is prepared to start all the containers and wait for the migrations to be completed
