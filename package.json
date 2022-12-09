@@ -14,7 +14,7 @@
     "apollo-server": "^2.3.1",
     "apollo-server-express": "^2.0.0",
     "body-parser": "^1.17.2",
-    "express": "4.16.3",
+    "express": "4.17.3",
     "graphql": "^0.13.2",
     "graphql-playground-middleware-express": "^1.7.2",
     "graphql-tools": "^3.1.1",
